@@ -35,3 +35,11 @@ func TestLambdaBug2(t *testing.T) {
 	)
 	parser.Parse("abc")
 }
+
+func TestLambdaBug3(t *testing.T) {
+	parser := Cmb(
+		"application",
+		Define("application", Literal("abc")),
+	)
+	parser.Parse("")
+}

@@ -38,6 +38,9 @@ func Literal(strToFind string) Parselet {
 	return func(s []byte, pos int, parser *Parser) (*ParseTreeNode, error) {
 		cursor := ignore(s, pos, parser)
 		strlen := len(strToFind)
+		if pos+strlen > len(s) {
+			return nil, fmt.Errorf("pos %d: Unexpected EOF", pos)
+		}
 		if !bytes.HasPrefix(s[cursor:], []byte(strToFind)) {
 			return nil, fmt.Errorf("pos %d: Expected %s got %s", pos, strToFind, s[pos:pos+strlen])
 		}
