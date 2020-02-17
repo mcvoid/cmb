@@ -54,6 +54,9 @@ func ignore(s []byte, pos int, parser *Parser) int {
 	for advanced {
 		advanced = false
 		for _, b := range []byte(parser.ignore) {
+			if cursor >= len(s) {
+				break
+			}
 			if s[cursor] == b {
 				cursor++
 				advanced = true
